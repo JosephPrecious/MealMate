@@ -89,6 +89,30 @@ body {
   padding: 1rem;
 }
 
+.recipe-detail {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.recipe-detail img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.recipe-detail ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-detail li {
+  background: #f1f1f1;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
 footer {
   text-align: center;
   padding: 2rem;
