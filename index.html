@@ -1,13 +1,47 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mealmate</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1>MealMate</h1>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="./src/pages/favorites.html">Favorites</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2>Find Your Next Meal</h2>
+
+        <p>
+          Search thousands of recipes and save your favorites.
+        </p>
+
+        <form class="search-form">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search recipes..."
+          />
+
+          <button type="submit">
+            Search
+          </button>
+        </form>
+      </section>
+
+      <section class="featured">
+        <h2>Featured Recipes</h2>
+
+        <div id="recipeContainer" class="recipe-grid">
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>MealMate © 2026</p>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
