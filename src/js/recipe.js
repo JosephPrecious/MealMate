@@ -1,4 +1,5 @@
 import { getRecipeById } from "./api.js";
+import "../css/style.css";
 
 const container = document.querySelector("#recipeDetail");
 
