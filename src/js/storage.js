@@ -31,3 +31,10 @@ export function removeFavorite(id) {
     JSON.stringify(favorites)
   );
 }
+
+export function getFavoriteCount() {
+  const favorites =
+    JSON.parse(localStorage.getItem("favorites")) || [];
+
+  return favorites.length;
+}
