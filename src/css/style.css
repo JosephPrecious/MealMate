@@ -113,6 +113,62 @@ body {
   border-radius: 5px;
 }
 
+#favoriteBtn {
+  padding: .75rem 1rem;
+
+  margin-bottom: 1rem;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+#favoritesContainer {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(250px,1fr));
+
+  gap: 1rem;
+
+  padding: 2rem;
+}
+
+.remove-btn {
+  width: 100%;
+  padding: .75rem;
+  border: none;
+  cursor: pointer;
+}
+
+.dark {
+  background: #121212;
+  color: white;
+}
+
+.dark .recipe-card {
+  background: #1f1f1f;
+}
+
+.dark .header {
+  background: #111;
+}
+
+.recipe-card {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,.2);
+}
+
 footer {
   text-align: center;
   padding: 2rem;

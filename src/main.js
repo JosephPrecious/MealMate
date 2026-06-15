@@ -1,6 +1,9 @@
 import "./css/style.css";
 import { searchRecipes } from "./js/api.js";
 import { createRecipeCard } from "./js/utils.js";
+import { initializeDarkMode } from "./js/darkmode.js";
+
+initializeDarkMode();
 
 const form = document.querySelector(".search-form");
 const container = document.querySelector("#recipeContainer");

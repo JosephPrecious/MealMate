@@ -1,4 +1,5 @@
 import { getRecipeById } from "./api.js";
+import { saveFavorite } from "./storage.js";
 import "../css/style.css";
 
 const container = document.querySelector("#recipeDetail");
@@ -25,6 +26,10 @@ function renderRecipe(recipe) {
 
       <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" />
 
+      <button id="favoriteBtn">
+       ❤ Save Favorite
+      </button>
+
       <h3>Ingredients</h3>
       <ul>
         ${getIngredients(recipe)}
@@ -34,6 +39,14 @@ function renderRecipe(recipe) {
       <p>${recipe.strInstructions}</p>
     </div>
   `;
+  document
+  .querySelector("#favoriteBtn")
+  .addEventListener("click", () => {
+
+    saveFavorite(recipe);
+
+    alert("Recipe added to favorites!");
+  });
 }
 
 function getIngredients(recipe) {
