@@ -1,59 +1,29 @@
-import "../css/style.css";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import {
-  getFavorites,
-  removeFavorite
-} from "./storage.js";
+  <title>Favorites</title>
+</head>
 
-const container =
-  document.querySelector("#favoritesContainer");
+<body>
 
-function renderFavorites() {
-  const favorites = getFavorites();
+<header class="header">
+  <h1>MealMate</h1>
 
-  if (favorites.length === 0) {
-    container.innerHTML =
-      "<p>No favorites saved yet.</p>";
-    return;
-  }
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+</header>
 
-  container.innerHTML = favorites
-    .map(
-      recipe => `
-      <div class="recipe-card">
+<main>
+  <h2>My Favorite Recipes</h2>
 
-        <a href="/recipe.html?id=${recipe.idMeal}">
-          <img
-            src="${recipe.strMealThumb}"
-            alt="${recipe.strMeal}"
-          />
+  <div id="favoritesContainer"></div>
+</main>
 
-          <h3>${recipe.strMeal}</h3>
-        </a>
+<script type="module" src="/src/js/favorites.js"></script>
 
-        <button
-          class="remove-btn"
-          data-id="${recipe.idMeal}">
-          Remove
-        </button>
-
-      </div>
-    `
-    )
-    .join("");
-
-  addRemoveListeners();
-}
-
-function addRemoveListeners() {
-  document
-    .querySelectorAll(".remove-btn")
-    .forEach(button => {
-      button.addEventListener("click", () => {
-        removeFavorite(button.dataset.id);
-        renderFavorites();
-      });
-    });
-}
-
-renderFavorites();
+</body>
+</html>
