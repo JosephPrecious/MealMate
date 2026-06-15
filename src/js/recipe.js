@@ -1,16 +1,17 @@
+import "../css/style.css";
+
 import { getRecipeById } from "./api.js";
 import { saveFavorite } from "./storage.js";
-import "../css/style.css";
+import { initializeDarkMode } from "./darkmode.js";
 
 const container = document.querySelector("#recipeDetail");
 
-// Get ID from URL
+// Get ID
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 async function loadRecipe() {
   const recipe = await getRecipeById(id);
-
   renderRecipe(recipe);
 }
 
@@ -26,9 +27,7 @@ function renderRecipe(recipe) {
 
       <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" />
 
-      <button id="favoriteBtn">
-       ❤ Save Favorite
-      </button>
+      <button id="favoriteBtn">❤ Save Favorite</button>
 
       <h3>Ingredients</h3>
       <ul>
@@ -39,14 +38,12 @@ function renderRecipe(recipe) {
       <p>${recipe.strInstructions}</p>
     </div>
   `;
-  document
-  .querySelector("#favoriteBtn")
-  .addEventListener("click", () => {
 
-    saveFavorite(recipe);
-
-    alert("Recipe added to favorites!");
-  });
+  document.querySelector("#favoriteBtn")
+    .addEventListener("click", () => {
+      saveFavorite(recipe);
+      alert("Recipe added to favorites!");
+    });
 }
 
 function getIngredients(recipe) {
@@ -65,3 +62,4 @@ function getIngredients(recipe) {
 }
 
 loadRecipe();
+initializeDarkMode();

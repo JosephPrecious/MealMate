@@ -1,4 +1,5 @@
 import "./css/style.css";
+
 import { searchRecipes, getFoodImage } from "./js/api.js";
 import { createRecipeCard } from "./js/utils.js";
 import { initializeDarkMode } from "./js/darkmode.js";
@@ -6,16 +7,15 @@ import { initializeDarkMode } from "./js/darkmode.js";
 const form = document.querySelector(".search-form");
 const container = document.querySelector("#recipeContainer");
 
-// Load default recipes on page load
+// Load recipes when page opens
 async function loadDefaultRecipes() {
   const meals = await searchRecipes("chicken");
-
   renderMeals(meals);
 }
 
 function renderMeals(meals) {
   if (!meals) {
-    container.innerHTML = "<p>Loading recipes...</p>";
+    container.innerHTML = "<p>No recipes found.</p>";
     return;
   }
 
@@ -24,34 +24,38 @@ function renderMeals(meals) {
     .join("");
 }
 
-// Search handler
-form.addEventListener("submit", async (e) => {
+// Search recipes
+form?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const query = document.querySelector("#searchInput").value;
+  const query =
+    document.querySelector("#searchInput").value.trim();
+
+  if (!query) return;
 
   const meals = await searchRecipes(query);
 
   renderMeals(meals);
 });
 
+// Hero image
 async function loadHeroImage() {
   const image = await getFoodImage();
 
   const hero =
     document.querySelector("#heroImage");
 
-  if (image) {
+  if (hero && image) {
     hero.innerHTML = `
       <img
         src="${image}"
-        alt="Food inspiration"
-      >
+        alt="Food Inspiration"
+      />
     `;
   }
 }
 
-// initial load
-loadDefaultRecipes();
+// Initialize
 initializeDarkMode();
+loadDefaultRecipes();
 loadHeroImage();
