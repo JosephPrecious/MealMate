@@ -27,3 +27,21 @@ export async function getRecipeById(id) {
     return null;
   }
 }
+
+const UNSPLASH_KEY =
+  import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+
+export async function getFoodImage() {
+  try {
+    const response = await fetch(
+      `https://api.unsplash.com/photos/random?query=food&client_id=${UNSPLASH_KEY}`
+    );
+
+    const data = await response.json();
+
+    return data.urls.regular;
+  } catch (error) {
+    console.error("Unsplash Error:", error);
+    return null;
+  }
+}
