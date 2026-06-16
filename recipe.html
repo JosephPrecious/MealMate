@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MealMate | Recipe</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MealMate helps you discover recipes, save favorites, and find meal inspiration.">
+  <meta name="author" content="Okoroji Precious">
+  <meta name="keywords" content="recipes, cooking, meals, food, MealMate">
+  <title>MealMate | Recipe Details</title>
+</head>
 
-    <script type="module" src="/src/js/recipe.js"></script>
-  </head>
+<body>
+  <header class="header">
+    <h1>MealMate</h1>
 
-  <body>
-    <header class="header">
-      <h1>MealMate</h1>
-      <nav>
-        <a href="/index.html">Home</a>
-        <a href="./favorites.html">Favorites</a>
-      </nav>
-      <button id="darkModeBtn">☀ / 🌙</button>
-    </header>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="./favorites.html">Favorites</a>
+    </nav>
 
-    <main id="recipeDetail">
-      <!-- Recipe will load here dynamically -->
-    </main>
+    <button id="darkModeBtn" type="button">Theme</button>
+  </header>
 
-    <footer>
-      <p>MealMate © 2026</p>
-    </footer>
+  <main id="recipeDetail"></main>
 
-    <script type="module" src="/src/js/recipe.js"></script>
-  </body>
+  <footer>
+    <p>MealMate &copy; 2026</p>
+  </footer>
+
+  <script type="module" src="/src/js/recipe.js"></script>
+</body>
 </html>

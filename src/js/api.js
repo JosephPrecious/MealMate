@@ -3,13 +3,27 @@ const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 export async function searchRecipes(query) {
   try {
     const response = await fetch(
-      `${BASE_URL}/search.php?s=${query}`
+      `${BASE_URL}/search.php?s=${encodeURIComponent(query)}`
     );
 
     const data = await response.json();
-    return data.meals;
+    return data.meals || [];
   } catch (error) {
     console.error("Error fetching recipes:", error);
+    return [];
+  }
+}
+
+export async function filterRecipesByCategory(category) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/filter.php?c=${encodeURIComponent(category)}`
+    );
+
+    const data = await response.json();
+    return data.meals || [];
+  } catch (error) {
+    console.error("Error fetching category:", error);
     return [];
   }
 }
@@ -17,7 +31,7 @@ export async function searchRecipes(query) {
 export async function getRecipeById(id) {
   try {
     const response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+      `${BASE_URL}/lookup.php?i=${encodeURIComponent(id)}`
     );
 
     const data = await response.json();
@@ -28,10 +42,13 @@ export async function getRecipeById(id) {
   }
 }
 
-const UNSPLASH_KEY =
-  import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
 export async function getFoodImage() {
+  if (!UNSPLASH_KEY) {
+    return null;
+  }
+
   try {
     const response = await fetch(
       `https://api.unsplash.com/photos/random?query=food&client_id=${UNSPLASH_KEY}`
@@ -39,7 +56,7 @@ export async function getFoodImage() {
 
     const data = await response.json();
 
-    return data.urls.regular;
+    return data.urls?.regular || null;
   } catch (error) {
     console.error("Unsplash Error:", error);
     return null;

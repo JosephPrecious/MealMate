@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MealMate helps you discover recipes, save favorites, and find meal inspiration.">
+  <meta name="author" content="Okoroji Precious">
+  <meta name="keywords" content="recipes, cooking, meals, food, MealMate">
+  <title>MealMate | Discover Recipes</title>
+</head>
+
 <body>
   <div id="app">
     <header class="header">
@@ -10,49 +21,55 @@
           <span id="favoriteCount">0</span>
         </a>
       </nav>
-      <button id="darkModeBtn">☀ / 🌙</button>
+
+      <button id="darkModeBtn" type="button">Theme</button>
     </header>
 
     <main>
       <section class="hero">
-
         <div id="heroImage"></div>
 
         <h2>Find Your Next Meal</h2>
 
-        <p>
-          Search thousands of recipes and save your favorites.
-        </p>
+        <p>Search thousands of recipes and save your favorites.</p>
 
         <form class="search-form">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search recipes..."
-          />
-
-          <button type="submit">
-            Search
-          </button>
+          <label for="searchInput" class="sr-only">Search Recipes</label>
+          <input type="text" id="searchInput" placeholder="Search recipes...">
+          <button type="submit">Search</button>
         </form>
+
+        <div id="searchHistory"></div>
+      </section>
+
+      <section class="categories" aria-labelledby="categoryTitle">
+        <h2 id="categoryTitle">Browse Categories</h2>
+        <div class="category-list">
+          <button type="button" class="category-btn" data-category="Breakfast">Breakfast</button>
+          <button type="button" class="category-btn" data-category="Chicken">Lunch</button>
+          <button type="button" class="category-btn" data-category="Beef">Dinner</button>
+          <button type="button" class="category-btn" data-category="Dessert">Dessert</button>
+        </div>
       </section>
 
       <section class="featured">
         <h2>Featured Recipes</h2>
+        <div id="recipeContainer" class="recipe-grid"></div>
+      </section>
 
-        <div id="recipeContainer" class="recipe-grid">
-        </div>
+      <section class="featured">
+        <h2>Recently Viewed</h2>
+        <div id="recentRecipes" class="recipe-grid"></div>
       </section>
     </main>
 
-    <button id="topBtn">
-      ↑
-    </button>
-    
+    <button id="topBtn" type="button" aria-label="Back to top">^</button>
+
     <footer>
-      <p>MealMate © 2026</p>
+      <p>MealMate &copy; 2026</p>
     </footer>
   </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
+</html>

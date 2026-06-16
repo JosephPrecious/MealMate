@@ -1,33 +1,43 @@
 import "../css/style.css";
 
 import { getRecipeById } from "./api.js";
-import { saveFavorite } from "./storage.js";
 import { initializeDarkMode } from "./darkmode.js";
+import { getFavorites, saveFavorite, saveRecent } from "./storage.js";
 
 const container = document.querySelector("#recipeDetail");
-
-// Get ID
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 async function loadRecipe() {
+  if (!id) {
+    container.innerHTML = "<p>Recipe not found.</p>";
+    return;
+  }
+
   const recipe = await getRecipeById(id);
   renderRecipe(recipe);
 }
 
 function renderRecipe(recipe) {
   if (!recipe) {
-    container.innerHTML = "<p>Recipe not found</p>";
+    container.innerHTML = "<p>Recipe not found.</p>";
     return;
   }
+
+  saveRecent(recipe);
+
+  const isFavorite = getFavorites()
+    .some((item) => item.idMeal === recipe.idMeal);
 
   container.innerHTML = `
     <div class="recipe-detail">
       <h2>${recipe.strMeal}</h2>
 
-      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" />
+      <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
 
-      <button id="favoriteBtn">❤ Save Favorite</button>
+      <button id="favoriteBtn" type="button">
+        ${isFavorite ? "Saved Favorite" : "Save Favorite"}
+      </button>
 
       <h3>Ingredients</h3>
       <ul>
@@ -42,7 +52,7 @@ function renderRecipe(recipe) {
   document.querySelector("#favoriteBtn")
     .addEventListener("click", () => {
       saveFavorite(recipe);
-      alert("Recipe added to favorites!");
+      document.querySelector("#favoriteBtn").textContent = "Saved Favorite";
     });
 }
 
@@ -54,7 +64,7 @@ function getIngredients(recipe) {
     const measure = recipe[`strMeasure${i}`];
 
     if (ingredient && ingredient.trim() !== "") {
-      list += `<li>${measure} ${ingredient}</li>`;
+      list += `<li>${measure || ""} ${ingredient}</li>`;
     }
   }
 

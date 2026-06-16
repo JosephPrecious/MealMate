@@ -33,8 +33,60 @@ export function removeFavorite(id) {
 }
 
 export function getFavoriteCount() {
-  const favorites =
-    JSON.parse(localStorage.getItem("favorites")) || [];
+  return getFavorites().length;
+}
 
-  return favorites.length;
+export function saveSearch(query) {
+  const cleanedQuery = query.trim();
+
+  if (!cleanedQuery) return;
+
+  let history =
+    JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+  if (!history.includes(cleanedQuery)) {
+    history.unshift(cleanedQuery);
+  }
+
+  history = history.slice(0, 5);
+
+  localStorage.setItem(
+    "searchHistory",
+    JSON.stringify(history)
+  );
+}
+
+export function getSearchHistory() {
+  return (
+    JSON.parse(
+      localStorage.getItem("searchHistory")
+    ) || []
+  );
+}
+
+export function saveRecent(recipe) {
+  let recent =
+    JSON.parse(localStorage.getItem("recentRecipes")) || [];
+
+  recent =
+    recent.filter(
+      item => item.idMeal !== recipe.idMeal
+    );
+
+  recent.unshift(recipe);
+
+  recent = recent.slice(0, 5);
+
+  localStorage.setItem(
+    "recentRecipes",
+    JSON.stringify(recent)
+  );
+}
+
+export function getRecentRecipes() {
+  return (
+    JSON.parse(
+      localStorage.getItem("recentRecipes")
+    ) || []
+  );
 }
